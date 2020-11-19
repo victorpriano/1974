@@ -1,6 +1,6 @@
 using BaltaStore.Domain.StoreContext.Enum;
 
-namespace BaltaStore.Domain.ValueObjects
+namespace BaltaStore.Domain.StoreContext
 {
     public class Address
     {

@@ -21,13 +21,16 @@ namespace BaltaStore.Tests
             var impressora = new Product("Impressora", "impressora", "img.png", 10, 10);
 
             var pedido = new Order(cliente);
-            pedido.AddItem(new OrderItem(mouse, 5));
-            pedido.AddItem(new OrderItem(teclado, 5));
-            pedido.AddItem(new OrderItem(monitor, 5));
-            pedido.AddItem(new OrderItem(impressora, 5));
+            // pedido.AddItem(new OrderItem(mouse, 5));
+            // pedido.AddItem(new OrderItem(teclado, 5));
+            // pedido.AddItem(new OrderItem(monitor, 5));
+            // pedido.AddItem(new OrderItem(impressora, 5));
 
             //Realizar pedido
             pedido.Place();
+
+            //Verificar se o pedido é válido
+            var valid = pedido.Valid;
 
             //Simular pagamento
             pedido.Pay();
