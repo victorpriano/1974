@@ -10,12 +10,17 @@ namespace BaltaStore.Domain.StoreContext
             Price = price;
             QuantityOnHand = quantity;
         }   
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public string Image { get; set; }
-        public decimal Price { get; set; }
-        public decimal QuantityOnHand { get; set; }
+        public string Title { get; private set; }
+        public string Description { get; private set; }
+        public string Image { get; private set; }
+        public decimal Price { get; private set; }
+        public decimal QuantityOnHand { get; private set; }
 
+        public void DecreaseQuantity(decimal quantity)
+        {
+            QuantityOnHand -= quantity;
+        }
+        
         public override string ToString()
         {
             return Title;
