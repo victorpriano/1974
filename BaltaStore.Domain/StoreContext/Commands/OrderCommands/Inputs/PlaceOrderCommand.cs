@@ -21,7 +21,7 @@ namespace BaltaStore.Domain.StoreContext.Commands.OrderCommands.Inputs
                 .HasLen(Customer.ToString(), 36, "Usuário", "Identificador do cliente inválido")
                 .IsGreaterThan(OrderItems.Count, 0, "Items", "Nenhum item foi encontrado")
             );
-            return IsValid();
+            return Valid;
         }
     }
 
