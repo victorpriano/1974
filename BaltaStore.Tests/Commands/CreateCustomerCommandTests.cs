@@ -16,7 +16,7 @@ namespace BaltaStore.Tests.Commands
             command.Document = "11111111111";
             command.Phone = "85999999999";
 
-            Assert.AreEqual(true, command.Valid);
+            Assert.AreEqual(true, command.IsValid());
         }
     }
 }
