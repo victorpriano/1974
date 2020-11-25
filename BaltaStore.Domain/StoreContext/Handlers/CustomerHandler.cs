@@ -51,7 +51,7 @@ namespace BaltaStore.Domain.StoreContext
             // Persistir o cliente
             // Enviar um email de boas vindas
             // Retornar o resultado na tela 
-            return new CreateCustomerCommandResult(Guid.NewGuid(), name.ToString(), email.Address);
+            return new CreateCustomerCommandResult(customer.Id, name.ToString(), email.Address);
         }
 
         public ICommandResult Handle(AddAddressCommand command)
