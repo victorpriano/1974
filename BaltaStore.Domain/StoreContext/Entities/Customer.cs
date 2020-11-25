@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using BaltaStore.Domain.StoreContext.ValueObjects;
+using BaltaStore.Shared.Entities;
 using FluentValidator;
 using FluentValidator.Validation;
 
 namespace BaltaStore.Domain.StoreContext
 {
-    public class Customer : Notifiable
+    public class Customer : Entity
     {
         private readonly IList<Address> _addresses;
         public Customer(Name name, Document document, Email email, string phone)

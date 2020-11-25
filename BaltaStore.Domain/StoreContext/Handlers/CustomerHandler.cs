@@ -1,6 +1,8 @@
 using System;
 using BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Inputs;
 using BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Outputs;
+using BaltaStore.Domain.StoreContext.Repositories;
+using BaltaStore.Domain.StoreContext.Services;
 using BaltaStore.Domain.StoreContext.ValueObjects;
 using BaltaStore.Shared.Commands;
 using FluentValidator;
@@ -12,10 +14,23 @@ namespace BaltaStore.Domain.StoreContext
         ICommandHandler<CreateCustomerCommand>,
         ICommandHandler<AddAddressCommand>
     {
+        private readonly ICustomerRepository _repository;
+        private readonly IEmailService _emailService;
+
+        public CustomerHandler(ICustomerRepository repository, IEmailService emailService)
+        {
+            _repository = repository;
+            _emailService = emailService;
+        }
         public ICommandResult Handle(CreateCustomerCommand command)
         {
             // Verificar se o CPF já existe na base
+            if(_repository.CheckDocument(command.Document))
+                AddNotification("Document", "Este CPF já está em uso");
+            
             // Verificar se o Email já existe na base
+            if(_repository.CheckEmail(command.Email))
+                AddNotification("Email", "Este E-mail já está em uso");
             // Criar os VOs
             var name = new Name(command.FirstName, command.LastName);
             var document = new Document(command.Document);
@@ -29,6 +44,9 @@ namespace BaltaStore.Domain.StoreContext
             AddNotifications(document.Notifications);
             AddNotifications(email.Notifications);
             AddNotifications(customer.Notifications);
+
+            if(Invalid)
+                return null;
 
             // Persistir o cliente
             // Enviar um email de boas vindas
