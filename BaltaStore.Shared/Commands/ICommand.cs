@@ -2,6 +2,6 @@ namespace BaltaStore.Shared.Commands
 {
     public interface ICommand
     {
-        bool IsValid();
+        bool IsValid();   
     }
 }

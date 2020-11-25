@@ -1,7 +1,7 @@
 using FluentValidator;
 using FluentValidator.Validation;
 
-namespace BaltaStore.Domain.ValueObjects
+namespace BaltaStore.Domain.StoreContext.ValueObjects
 {
     public class Document : Notifiable
     {
