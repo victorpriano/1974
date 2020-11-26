@@ -49,7 +49,9 @@ namespace BaltaStore.Domain.StoreContext
                 return null;
 
             // Persistir o cliente
+            _repository.Save(customer);
             // Enviar um email de boas vindas
+            _emailService.Send(email.Address, "hello@victor.com", "Seja vem vindo", "Bem vindo");
             // Retornar o resultado na tela 
             return new CreateCustomerCommandResult(customer.Id, name.ToString(), email.Address);
         }
