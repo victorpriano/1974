@@ -12,6 +12,7 @@
 </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaltaStore.Shared\BaltaStore.Shared.csproj" />
+    <ProjectReference Include="..\BaltaStore.Domain\BaltaStore.Domain.csproj" />
   </ItemGroup>
 
 
