@@ -1,3 +1,8 @@
+using BaltaStore.Domain.StoreContext.Repositories;
+using BaltaStore.Domain.StoreContext.Services;
+using BaltaStore.Infra.StoreContext.DataContexts;
+using BaltaStore.Infra.StoreContext.Repositories;
+using BaltaStore.Infra.StoreContext.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -13,6 +18,9 @@ namespace BaltaStore.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(option => option.EnableEndpointRouting = false);
+            services.AddScoped<BaltaStoreDataContext, BaltaStoreDataContext>();
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<IEmailService, EmailService>();
             
         }
 
