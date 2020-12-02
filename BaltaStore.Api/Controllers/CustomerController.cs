@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using BaltaStore.Domain.StoreContext;
 using BaltaStore.Domain.StoreContext.Commands.CustomerCommands.Inputs;
+using BaltaStore.Domain.StoreContext.Queries;
+using BaltaStore.Domain.StoreContext.Repositories;
 using BaltaStore.Domain.StoreContext.ValueObjects;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,52 +11,31 @@ namespace BaltaStore.Api.Controllers
 {
     public class CustomerController : Controller
     {
+        private readonly ICustomerRepository _repository;
+        public CustomerController(ICustomerRepository repository)
+        {
+            _repository = repository;
+        }
+
         [HttpGet]
         [Route("customers")]
-        public List<Customer> Get()
+        public IEnumerable<ListCustomerQueryResult> Get()
         {
-            var nome = new Name("Victor", "Oliveira");
-            var document = new Document("51468226037");
-            var email = new Email("vic@curu.com");
-            var cliente = new Customer(nome, document, email, "85998855");
-            var clientes = new List<Customer>();
-            clientes.Add(cliente);
-            
-            return clientes;
+            return _repository.Get();
         }
 
         [HttpGet]
         [Route("customers/{id}")]
-        public Customer GetById(Guid id)
+        public GetCustomerQueryResult GetById(Guid id)
         {
-            var nome = new Name("Victor", "Oliveira");
-            var document = new Document("51468226037");
-            var email = new Email("vic@curu.com");
-            var cliente = new Customer(nome, document, email, "85998855");
-
-            return cliente;
+            return _repository.Get(id);
         }
 
         [HttpGet]
         [Route("customers/{id}/orders")]
-        public List<Order> GetOrders(Guid id)
+        public IEnumerable<ListCustomerOrdersQueryResult> GetOrders(Guid id)
         {
-            var nome = new Name("Victor", "Oliveira");
-            var document = new Document("51468226037");
-            var email = new Email("vic@curu.com");
-            var cliente = new Customer(nome, document, email, "85998855");
-
-            var pedido = new Order(cliente);
-
-            var mouse = new Product("Mouse", "Mouse", "mouse.jpg", 100M, 10);
-            var keyboard = new Product("Teclado", "Teclado", "teclado.jpg", 100M, 10);
-            pedido.AddItem(mouse, 5);
-            pedido.AddItem(keyboard, 5);
-
-            var pedidos = new List<Order>();
-            pedidos.Add(pedido);
-
-            return pedidos;
+            return _repository.GetOrders(id);
         }
 
         [HttpPost]

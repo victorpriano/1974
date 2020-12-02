@@ -60,7 +60,7 @@ namespace BaltaStore.Infra.StoreContext.Repositories
                 .FirstOrDefault();
         }
 
-        /*public CustomerOrdersCountResult GetCustomerOrdersCountResult(string document)
+        public CustomerOrdersCountResult GetCustomerOrdersCountResult(string document)
         {
             return 
                 _context
@@ -70,7 +70,7 @@ namespace BaltaStore.Infra.StoreContext.Repositories
                     new { Document = document },
                     commandType : CommandType.StoredProcedure)
                 .FirstOrDefault();
-        }*/
+        }
 
         public IEnumerable<ListCustomerOrdersQueryResult> GetOrders(Guid id)
         {
