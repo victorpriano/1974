@@ -18,6 +18,9 @@ namespace BaltaStore.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(option => option.EnableEndpointRouting = false);
+
+            services.AddResponseCompression();
+
             services.AddScoped<BaltaStoreDataContext, BaltaStoreDataContext>();
             services.AddTransient<ICustomerRepository, CustomerRepository>();
             services.AddTransient<IEmailService, EmailService>();
@@ -35,6 +38,8 @@ namespace BaltaStore.Api
             app.UseRouting();
 
             app.UseMvc();
+
+            app.UseResponseCompression();
 
         }
     }
